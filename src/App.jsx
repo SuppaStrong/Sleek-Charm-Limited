@@ -6,7 +6,6 @@ import {
   ChevronRight,
   Play,
   Download,
-  ExternalLink,
   Mail,
   Phone,
   MapPin,
@@ -14,7 +13,6 @@ import {
   Facebook,
   Twitter,
   Instagram,
-  Calendar,
   Clock,
   Users,
   Target,
@@ -35,7 +33,6 @@ import {
   Heart,
   Code,
   Palette,
-  Briefcase,
   GraduationCap,
   Coffee,
   Sparkles
@@ -78,12 +75,12 @@ const partners = [
   {
     id: 3,
     name: "Steam",
-    logo: "	https://metagames.ltd/wp-content/uploads/2024/11/youtube.png"
+    logo: "https://metagames.ltd/wp-content/uploads/2024/11/youtube.png"
   },
   {
     id: 4,
     name: "PlayStation",
-    logo: "	https://metagames.ltd/wp-content/uploads/2024/11/Google_AdMob_logo.svg_-2-300x69.png"
+    logo: "https://metagames.ltd/wp-content/uploads/2024/11/Google_AdMob_logo.svg_-2-300x69.png"
   },
   {
     id: 5,
@@ -304,6 +301,116 @@ const timeline = [
 ];
 
 // Reusable Components
+const ContactDialog = ({ isOpen, onClose, job }) => {
+  if (!isOpen) return null;
+
+  return (
+    <div className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/70 backdrop-blur-sm">
+      <div className="bg-gradient-to-b from-gray-800 to-gray-900 rounded-3xl shadow-2xl border border-blue-500/20 max-w-4xl w-full max-h-[90vh] overflow-y-auto">
+        {/* Header */}
+        <div className="sticky top-0 bg-gradient-to-r from-blue-600 to-cyan-500 p-6 rounded-t-3xl flex justify-between items-center">
+          <div>
+            <h2 className="text-2xl font-bold text-white">Apply for {job?.title}</h2>
+            <p className="text-blue-100">Contact us to apply for this position</p>
+          </div>
+          <button
+            onClick={onClose}
+            className="text-white hover:bg-white/20 p-2 rounded-xl transition-all duration-300"
+          >
+            <X className="h-6 w-6" />
+          </button>
+        </div>
+
+        {/* Content */}
+        <div className="p-8">
+          <div className="space-y-6">
+            {/* Company Info */}
+            <div className="bg-gray-800/50 p-6 rounded-2xl border border-blue-500/20">
+              <h3 className="text-xl font-bold text-white mb-6">Contact Information</h3>
+              
+              <div className="space-y-6">
+                <div className="flex items-start space-x-4">
+                  <div className="bg-gradient-to-r from-blue-600 to-cyan-500 p-3 rounded-xl">
+                    <MapPin className="h-6 w-6 text-white" />
+                  </div>
+                  <div>
+                    <p className="font-semibold text-white text-lg">Address</p>
+                    <p className="text-gray-300 mt-2 leading-relaxed">
+                      WEST WING, 2/F.<br />
+                      822 LAI CHI KOK ROAD, CHEUNG SHA WAN<br />
+                      HONG KONG
+                    </p>
+                  </div>
+                </div>
+                
+                <div className="flex items-center space-x-4">
+                  <div className="bg-gradient-to-r from-blue-600 to-cyan-500 p-3 rounded-xl">
+                    <Mail className="h-6 w-6 text-white" />
+                  </div>
+                  <div>
+                    <p className="font-semibold text-white text-lg">Email</p>
+                    <p className="text-gray-300 mt-1">contact@sleekcharm.games</p>
+                  </div>
+                </div>
+                
+                <div className="flex items-center space-x-4">
+                  <div className="bg-gradient-to-r from-blue-600 to-cyan-500 p-3 rounded-xl">
+                    <Phone className="h-6 w-6 text-white" />
+                  </div>
+                  <div>
+                    <p className="font-semibold text-white text-lg">Phone</p>
+                    <p className="text-gray-300 mt-1">+852 4424 9946</p>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            {/* Social Media */}
+            <div className="bg-gray-800/50 p-6 rounded-2xl border border-blue-500/20">
+              <h3 className="text-xl font-bold text-white mb-6">Follow Us</h3>
+              
+              <div className="grid grid-cols-2 gap-4">
+                {[
+                  { icon: Linkedin, name: "LinkedIn", color: "from-blue-600 to-blue-700" },
+                  { icon: Facebook, name: "Facebook", color: "from-blue-700 to-blue-800" },
+                  { icon: Twitter, name: "Twitter", color: "from-sky-500 to-sky-600" },
+                  { icon: Instagram, name: "Instagram", color: "from-pink-600 to-blue-600" }
+                ].map((social, index) => (
+                  <button
+                    key={index}
+                    className={`bg-gradient-to-r ${social.color} hover:scale-105 text-white p-4 rounded-xl transition-all duration-300 flex items-center justify-center space-x-2 shadow-lg`}
+                  >
+                    <social.icon className="h-5 w-5" />
+                    <span className="font-semibold">{social.name}</span>
+                  </button>
+                ))}
+              </div>
+            </div>
+
+            {/* Application Note */}
+            <div className="bg-blue-600/10 p-6 rounded-2xl border border-blue-500/30">
+              <p className="text-gray-300 leading-relaxed">
+                <strong className="text-white">To apply for this position:</strong><br />
+                Please send your resume and cover letter to <span className="text-blue-400 font-semibold">contact@sleekcharm.games</span> with the subject line "Application: {job?.title}". We look forward to hearing from you!
+              </p>
+            </div>
+          </div>
+        </div>
+
+        {/* Footer */}
+        <div className="p-6 border-t border-blue-500/20">
+          <button
+            onClick={onClose}
+            className="w-full bg-gradient-to-r from-blue-600 to-cyan-500 hover:from-blue-700 hover:to-cyan-600 text-white py-4 rounded-xl font-bold transition-all duration-300 flex items-center justify-center space-x-3 shadow-lg hover:shadow-blue-500/25"
+          >
+            <span>Close</span>
+          </button>
+        </div>
+      </div>
+    </div>
+  );
+};
+
 const Navigation = ({ currentPage, setCurrentPage, isMenuOpen, setIsMenuOpen }) => {
   const navItems = [
     { id: 'home', label: 'Home' },
@@ -551,10 +658,18 @@ const GameCard = ({ game }) => (
       </div>
       
       <div className="flex space-x-3">
-        <button className="flex-1 bg-gradient-to-r from-blue-600 to-cyan-500 hover:from-blue-700 hover:to-cyan-600 text-white px-6 py-3 rounded-xl font-semibold transition-all duration-300 flex items-center justify-center space-x-2 shadow-lg hover:shadow-blue-500/25 hover:scale-105">
-          <Download className="h-4 w-4" />
-          <span>Download</span>
-        </button>
+        <a
+          href="https://play.google.com/store/apps/dev?id=8261223609324337203"
+          target="_blank"
+          rel="noopener noreferrer"
+          className="flex-1"
+        >
+          <button className="w-full bg-gradient-to-r from-blue-600 to-cyan-500 hover:from-blue-700 hover:to-cyan-600 text-white px-6 py-3 rounded-xl font-semibold transition-all duration-300 flex items-center justify-center space-x-2 shadow-lg hover:shadow-blue-500/25 hover:scale-105">
+            <Download className="h-4 w-4" />
+            <span>Download</span>
+          </button>
+        </a>
+
         <button className="px-4 py-3 border border-blue-500/50 hover:border-blue-400 text-blue-300 hover:text-white rounded-xl transition-all duration-300 hover:bg-blue-600/20">
           <Eye className="h-4 w-4" />
         </button>
@@ -563,7 +678,7 @@ const GameCard = ({ game }) => (
   </div>
 );
 
-const JobCard = ({ job }) => (
+const JobCard = ({ job, onApplyClick }) => (
   <div className="bg-gradient-to-b from-gray-800 to-gray-900 rounded-3xl shadow-2xl p-8 hover:shadow-blue-500/25 transition-all duration-500 border border-blue-500/20 hover:border-blue-400/40 group">
     <div className="flex justify-between items-start mb-6">
       <div className="flex items-start space-x-4">
@@ -607,7 +722,10 @@ const JobCard = ({ job }) => (
       </div>
     </div>
     
-    <button className="w-full bg-gradient-to-r from-blue-600 to-cyan-500 hover:from-blue-700 hover:to-cyan-600 text-white py-4 rounded-xl font-bold transition-all duration-300 flex items-center justify-center space-x-3 shadow-lg hover:shadow-blue-500/25 hover:scale-105">
+    <button 
+      onClick={() => onApplyClick(job)}
+      className="w-full bg-gradient-to-r from-blue-600 to-cyan-500 hover:from-blue-700 hover:to-cyan-600 text-white py-4 rounded-xl font-bold transition-all duration-300 flex items-center justify-center space-x-3 shadow-lg hover:shadow-blue-500/25 hover:scale-105"
+    >
       <span>Apply Now</span>
       <ArrowRight className="h-5 w-5" />
     </button>
@@ -969,6 +1087,8 @@ const JobsPage = () => {
   const [searchTerm, setSearchTerm] = useState('');
   const [selectedDepartment, setSelectedDepartment] = useState('All');
   const [selectedType, setSelectedType] = useState('All');
+  const [isDialogOpen, setIsDialogOpen] = useState(false);
+  const [selectedJob, setSelectedJob] = useState(null);
   
   const departments = ['All', 'Engineering', 'Art', 'Design', 'Quality Assurance', 'Marketing'];
   const types = ['All', 'Full-time', 'Contract', 'Part-time'];
@@ -980,6 +1100,16 @@ const JobsPage = () => {
     const matchesType = selectedType === 'All' || job.type === selectedType;
     return matchesSearch && matchesDepartment && matchesType;
   });
+
+  const handleApplyClick = (job) => {
+    setSelectedJob(job);
+    setIsDialogOpen(true);
+  };
+
+  const handleCloseDialog = () => {
+    setIsDialogOpen(false);
+    setSelectedJob(null);
+  };
 
   return (
     <div className="pt-20">
@@ -1045,7 +1175,7 @@ const JobsPage = () => {
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="grid lg:grid-cols-2 gap-8">
             {filteredJobs.map((job) => (
-              <JobCard key={job.id} job={job} />
+              <JobCard key={job.id} job={job} onApplyClick={handleApplyClick} />
             ))}
           </div>
           
@@ -1058,6 +1188,13 @@ const JobsPage = () => {
           )}
         </div>
       </section>
+
+      {/* Contact Dialog */}
+      <ContactDialog 
+        isOpen={isDialogOpen} 
+        onClose={handleCloseDialog} 
+        job={selectedJob}
+      />
 
       {/* Benefits Section */}
       <section className="py-20 bg-gradient-to-r from-blue-900/20 to-cyan-900/20 border-y border-blue-500/20">
