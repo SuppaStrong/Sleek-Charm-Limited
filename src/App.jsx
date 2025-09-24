@@ -659,7 +659,7 @@ const GameCard = ({ game }) => (
       
       <div className="flex space-x-3">
         <a
-          href="https://play.google.com/store/apps/dev?id=8261223609324337203"
+          href="https://play.google.com/store/apps/developer?id=SLEEK+CHARM+LIMITED"
           target="_blank"
           rel="noopener noreferrer"
           className="flex-1"
